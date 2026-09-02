@@ -27,11 +27,13 @@ bio:String,
 experienceYears:Number,
 //member
 membershipType:String,
-
 emergencyContact:String,
-
+  faceEncoding: {
+    type: Buffer
+  }
+  
 }, { timestamps: true });
 
-const User = mongoose.model('admin\\trainer\\member User', userSchema);
+const User = mongoose.model('User', userSchema);
 
 module.exports = User;

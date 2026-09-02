@@ -1,5 +1,4 @@
 const bookingmodel = require('../models/booking.model');
-const bookingmodel = require('../models/booking.model');
 
 // Créer une réservation
 module.exports.createBooking = async (req, res) => {
@@ -75,5 +74,49 @@ module.exports.deleteBooking = async (req, res) => {
         });
     } catch (error) {
         res.status(400).json({ message: error.message });
+    }
+};
+module.exports.getBookingByMemberId = async (req, res) => {
+    try {
+        const bookings = await bookingmodel.find({ memberId: req.params.memberId });
+        res.status(200).json(bookings);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+module.exports.rescheduleBooking = async (req, res) => {
+    try {
+        const booking = await bookingmodel.findById(req.params.id);
+        if (!booking) {
+            return res.status(404).json({ message: 'Réservation introuvable' });
+        }
+
+        booking.date = req.body.date;
+        await booking.save();
+        res.status(200).json(booking);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+module.exports.cancelBooking = async (req, res) => {
+    try {
+        const booking = await bookingmodel.findById(req.params.id);
+        if (!booking) {
+            return res.status(404).json({ message: 'Réservation introuvable' });
+        }
+
+        booking.status = 'cancelled';
+        await booking.save();
+        res.status(200).json(booking);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+module.exports.isUpcoming = async (req, res) => {
+    try {
+        const bookings = await bookingmodel.find({ date: { $gt: new Date() } });
+        res.status(200).json(bookings);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 };

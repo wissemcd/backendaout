@@ -73,4 +73,3 @@ module.exports.matchFaceRecognition = async (req, res) => {
     }
 };
 
-

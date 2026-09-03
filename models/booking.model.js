@@ -5,6 +5,9 @@ const bookingSchema = new mongoose.Schema({
     status: { type: String, enum: ['pending', 'confirmed', 'cancelled'], default: 'pending' },
     memberId: { type: mongoose.Schema.Types.ObjectId, ref: 'Member', required: true },
     notes: { type: String },
+     userMember :{type:mongoose.Schema.Types.ObjectId,ref:'member'},
+      classSession :{type:mongoose.Schema.Types.ObjectId,ref:'classSession'},
+      facilityAcess :{type:mongoose.Schema.Types.ObjectId,ref:'facility'}
 }, { timestamps: true });
 
 const booking = mongoose.model('Booking', bookingSchema);

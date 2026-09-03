@@ -7,7 +7,7 @@ method:{type:String,enum:['credit_card','debit_card','bank_transfer'],required:t
 status:{type:String,enum:['pending','completed','failed'],default:'pending'},
 transactionRef:{type:String,unique:true},
 
-    
+     membership :{type:mongoose.Schema.Types.ObjectId,ref:'membership'}
 
 }, { timestamps: true });
 

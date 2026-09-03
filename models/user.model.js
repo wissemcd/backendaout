@@ -30,8 +30,10 @@ membershipType:String,
 emergencyContact:String,
   faceEncoding: {
     type: Buffer
-  }
-  
+  },
+  membership :{type:mongoose.Schema.Types.ObjectId,ref:'membership'},
+ booking :[{type:mongoose.Schema.Types.ObjectId,ref:'booking'}],
+ classSession :{type:mongoose.Schema.Types.ObjectId,ref:'classSession'},
 }, { timestamps: true });
 
 const User = mongoose.model('User', userSchema);

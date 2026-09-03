@@ -5,6 +5,7 @@ const faceRecognitionSchema = new mongoose.Schema({
 	encoding: { type: Buffer, required: true },
 	confidenceScore: { type: Number, required: true },
 	recognized: { type: Boolean, default: false },
+	facilityAccess :{type:mongoose.Schema.Types.ObjectId,ref:'facilityAccess'},
 }, { timestamps: true });
 
 faceRecognitionSchema.methods.match = function (encoding) {
@@ -20,6 +21,7 @@ faceRecognitionSchema.methods.match = function (encoding) {
 		return false;
 	}
 };
+
 
 const FaceRecognition = mongoose.model('FaceRecognition', faceRecognitionSchema);
 module.exports = FaceRecognition;

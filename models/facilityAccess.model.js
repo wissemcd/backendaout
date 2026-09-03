@@ -5,6 +5,9 @@ const facilityAccessSchema = new mongoose.Schema({
 	accessType: { type: String, required: true },
 	accessGranted: { type: Boolean, default: false },
 
+	booking :{type:mongoose.Schema.Types.ObjectId,ref:'booking'},
+	faceRecognition :{type:mongoose.Schema.Types.ObjectId,ref:'faceRecognition'},
+
 }, { timestamps: true });
 
 const FacilityAccess = mongoose.model('FacilityAccess', facilityAccessSchema);
